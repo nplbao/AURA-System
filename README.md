@@ -2,9 +2,9 @@
 ## Backend
    - Bước 1: Tạo môi trường ảo co Python (phiên bản 3.x)
      ## Windows:
-     		py -m venv .venv
+     		python -m venv venv
      ## Unix/MacOS:
-     		python3 -m venv .venv
+     		python3 -m venv venv
    - Bước 2: Kích hoạt môi trường:
      ## Windows:
      		venv\Scripts\activate
