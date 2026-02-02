@@ -44,7 +44,12 @@ export const Register = () => {
       await register(formData.email, formData.password, formData.name, formData.role);
       navigate('/dashboard');
     } catch (err) {
-      setError('Registration failed. Please try again.');
+      const message = err instanceof Error ? err.message : 'Đăng ký không thành công. Vui lòng thử lại.';
+      setError(
+        message === 'Failed to fetch'
+          ? 'Không kết nối được máy chủ. Vui lòng chạy backend (port 8000) rồi thử lại.'
+          : message
+      );
     } finally {
       setLoading(false);
     }

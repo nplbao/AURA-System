@@ -20,7 +20,12 @@ export const Login = () => {
       await login(email, password);
       navigate('/dashboard');
     } catch (err) {
-      setError('Invalid email or password');
+      const message = err instanceof Error ? err.message : 'Sai email hoặc mật khẩu.';
+      setError(
+        message === 'Failed to fetch'
+          ? 'Không kết nối được máy chủ. Vui lòng chạy backend (port 8000) rồi thử lại.'
+          : message
+      );
     } finally {
       setLoading(false);
     }
