@@ -5,12 +5,12 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 
 from app.database import users_db
 from app.deps import require_roles
-from app.models import UserRole, ClinicStatus
+from app.models import UserRole, ClinicStatus, ClinicResponse, ClinicActionResponse
 
 router = APIRouter(prefix="/clinics", tags=["clinics"])
 
 
-@router.get("", response_model=list[dict])
+@router.get("", response_model=list[ClinicResponse])
 def list_clinics(
     user: Annotated[dict, Depends(require_roles([UserRole.admin]))],
     search: Optional[str] = Query(None),
@@ -38,7 +38,7 @@ def list_clinics(
     return out
 
 
-@router.patch("/{clinic_id}/approve")
+@router.patch("/{clinic_id}/approve", response_model=ClinicActionResponse)
 def approve_clinic(
     clinic_id: str,
     user: Annotated[dict, Depends(require_roles([UserRole.admin]))],
@@ -50,7 +50,7 @@ def approve_clinic(
     return {"id": clinic_id, "status": "approved"}
 
 
-@router.patch("/{clinic_id}/suspend")
+@router.patch("/{clinic_id}/suspend", response_model=ClinicActionResponse)
 def suspend_clinic(
     clinic_id: str,
     user: Annotated[dict, Depends(require_roles([UserRole.admin]))],

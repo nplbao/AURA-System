@@ -6,7 +6,7 @@ from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
 
 from app.database import images_db, results_db, users_db, gen_id
 from app.deps import get_current_user, require_roles
-from app.models import UserRole, RetinalImageResponse
+from app.models import UserRole, RetinalImageResponse, ImageType
 
 router = APIRouter(prefix="/images", tags=["images"])
 
@@ -14,11 +14,9 @@ router = APIRouter(prefix="/images", tags=["images"])
 @router.post("/upload", response_model=list[RetinalImageResponse])
 async def upload_images(
     user: Annotated[dict, Depends(require_roles([UserRole.user]))],
-    image_type: str = Form("Fundus"),
+    image_type: ImageType = Form("Fundus"),
     files: list[UploadFile] = File(...),
 ):
-    if image_type not in ("Fundus", "OCT"):
-        raise HTTPException(400, "image_type must be Fundus or OCT")
     credits = users_db.get(user["id"], {}).get("credits", 0)
     if len(files) > credits:
         raise HTTPException(402, f"Not enough credits. You have {credits}, need {len(files)}")

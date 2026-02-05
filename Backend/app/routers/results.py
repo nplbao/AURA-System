@@ -5,12 +5,12 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 
 from app.database import results_db, images_db
 from app.deps import get_current_user, require_roles
-from app.models import UserRole, DiagnosticResultResponse
+from app.models import UserRole, ResultListItem, ResultHistoryItem, ResultDetailResponse
 
 router = APIRouter(prefix="/results", tags=["results"])
 
 
-@router.get("", response_model=list[dict])
+@router.get("", response_model=list[ResultListItem])
 def my_results(
     user: Annotated[dict, Depends(require_roles([UserRole.user]))],
     risk_level: Optional[str] = Query(None),
@@ -38,7 +38,7 @@ def my_results(
     return out
 
 
-@router.get("/history", response_model=list[dict])
+@router.get("/history", response_model=list[ResultHistoryItem])
 def my_history(
     user: Annotated[dict, Depends(require_roles([UserRole.user]))],
     type_filter: Optional[str] = Query(None, alias="type"),
@@ -64,7 +64,7 @@ def my_history(
     return out
 
 
-@router.get("/{result_id}", response_model=dict)
+@router.get("/{result_id}", response_model=ResultDetailResponse)
 def get_result(
     result_id: str,
     user: Annotated[dict, Depends(get_current_user)],

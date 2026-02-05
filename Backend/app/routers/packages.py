@@ -8,10 +8,13 @@ from app.deps import get_current_user, require_roles
 from app.models import (
     UserRole,
     ServicePackageResponse,
+    ServicePackageAdminResponse,
     ServicePackageCreate,
     ServicePackageUpdate,
     PaymentHistoryResponse,
     PurchaseRequest,
+    PackagePurchaseResponse,
+    CreditsResponse,
 )
 
 router = APIRouter(prefix="/packages", tags=["packages"])
@@ -42,7 +45,7 @@ def list_packages(active_only: bool = True):
 
 
 # Admin: list all packages (including inactive)
-@router.get("/admin", response_model=list[dict])
+@router.get("/admin", response_model=list[ServicePackageAdminResponse])
 def admin_list_packages(
     user: Annotated[dict, Depends(require_roles([UserRole.admin]))],
 ):
@@ -93,7 +96,7 @@ def update_package(
 
 
 # User/Clinic: purchase package
-@router.post("/purchase")
+@router.post("/purchase", response_model=PackagePurchaseResponse)
 def purchase_package(
     body: PurchaseRequest,
     user: Annotated[dict, Depends(require_roles([UserRole.user, UserRole.clinic]))],
@@ -147,6 +150,6 @@ def my_payments(user: Annotated[dict, Depends(require_roles([UserRole.user, User
 
 
 # User: remaining credits
-@router.get("/credits")
+@router.get("/credits", response_model=CreditsResponse)
 def my_credits(user: Annotated[dict, Depends(get_current_user)]):
     return {"credits": users_db.get(user["id"], {}).get("credits", 0)}

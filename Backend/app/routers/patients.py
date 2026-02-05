@@ -5,12 +5,12 @@ from fastapi import APIRouter, Depends, Query
 
 from app.database import users_db, results_db
 from app.deps import require_roles
-from app.models import UserRole
+from app.models import UserRole, PatientResponse
 
 router = APIRouter(prefix="/patients", tags=["patients"])
 
 
-@router.get("", response_model=list[dict])
+@router.get("", response_model=list[PatientResponse])
 def list_patients(
     user: Annotated[dict, Depends(require_roles([UserRole.doctor, UserRole.clinic]))],
     search: Optional[str] = Query(None),
@@ -43,7 +43,7 @@ def list_patients(
             "name": u["name"],
             "email": u["email"],
             "risk_level": risk,
-            "last_analysis": last_analysis.get(uid),
+            "last_analysis_date": last_analysis.get(uid),
         })
-    out.sort(key=lambda x: (x["last_analysis"] or ""), reverse=True)
+    out.sort(key=lambda x: (x.get("last_analysis_date") or ""), reverse=True)
     return out

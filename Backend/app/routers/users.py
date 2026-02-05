@@ -5,7 +5,14 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 
 from app.database import users_db
 from app.deps import get_current_user, require_roles
-from app.models import UserRole, UserListResponse, UserUpdate, UserStatusUpdate, UserResponse
+from app.models import (
+    UserRole,
+    UserListResponse,
+    UserUpdate,
+    UserStatusUpdate,
+    UserResponse,
+    UserStatusActionResponse,
+)
 
 router = APIRouter(prefix="/users", tags=["users"])
 
@@ -25,7 +32,7 @@ def get_me(user: Annotated[dict, Depends(get_current_user)]):
     return user_to_response(user)
 
 
-@router.patch("/me")
+@router.patch("/me", response_model=UserResponse)
 def update_me(user: Annotated[dict, Depends(get_current_user)], body: UserUpdate):
     u = users_db.get(user["id"])
     if not u:
@@ -76,7 +83,7 @@ def list_users(
 
 
 # Admin: toggle user status
-@router.patch("/{user_id}/status")
+@router.patch("/{user_id}/status", response_model=UserStatusActionResponse)
 def update_user_status(
     user_id: str,
     body: UserStatusUpdate,

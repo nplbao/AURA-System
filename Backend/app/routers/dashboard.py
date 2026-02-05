@@ -5,12 +5,26 @@ from fastapi import APIRouter, Depends
 
 from app.database import users_db, images_db, results_db, payments_db
 from app.deps import get_current_user
-from app.models import UserRole
+from app.models import (
+    UserRole,
+    DashboardUserStatsResponse,
+    DashboardClinicStatsResponse,
+    DashboardAdminStatsResponse,
+    DashboardDoctorStatsResponse,
+)
 
 router = APIRouter(prefix="/dashboard", tags=["dashboard"])
 
 
-@router.get("/stats")
+@router.get(
+    "/stats",
+    response_model=(
+        DashboardUserStatsResponse
+        | DashboardClinicStatsResponse
+        | DashboardAdminStatsResponse
+        | DashboardDoctorStatsResponse
+    ),
+)
 def dashboard_stats(user: Annotated[dict, Depends(get_current_user)]):
     role = user.get("role")
     uid = user["id"]

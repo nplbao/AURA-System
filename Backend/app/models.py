@@ -1,6 +1,7 @@
 # AURA Backend - Pydantic models (match Frontend types)
 from enum import Enum
 from typing import Optional, Literal
+
 from pydantic import BaseModel
 
 
@@ -187,3 +188,141 @@ class AlertResponse(BaseModel):
     message: str
     level: Literal["high-risk", "medium-risk", "info"]
     created_at: str
+
+
+# --- Common / misc ---
+class MessageResponse(BaseModel):
+    message: str
+
+
+class HealthResponse(BaseModel):
+    status: Literal["ok"]
+
+
+class RootResponse(BaseModel):
+    message: str
+    docs: str
+
+
+class CreditsResponse(BaseModel):
+    credits: int
+
+
+# --- Packages / purchase ---
+class ServicePackageAdminResponse(BaseModel):
+    id: str
+    name: str
+    price: float
+    image_credits: int
+    duration: int
+    active: bool
+
+
+class PackagePurchaseResponse(BaseModel):
+    id: str
+    amount: float
+    date: str
+    package_name: str
+    status: Literal["completed", "pending", "failed"]
+    credits_added: int
+
+
+# --- Clinics ---
+class ClinicActionResponse(BaseModel):
+    id: str
+    status: ClinicStatus
+
+
+class UserStatusActionResponse(BaseModel):
+    id: str
+    status: UserStatus
+
+
+# --- Results (user-facing list/detail) ---
+class ResultListItem(BaseModel):
+    id: str
+    image_id: str
+    image_name: str
+    upload_date: str
+    risk_level: RiskLevel
+    status: Literal["completed", "pending", "processing", "failed"]
+    findings: list[str]
+
+
+class ResultHistoryItem(BaseModel):
+    id: str
+    date: str
+    type: ImageType
+    risk: RiskLevel
+    status: Literal["completed", "pending", "processing", "failed"]
+
+
+class ResultDetailResponse(BaseModel):
+    id: str
+    image_id: str
+    image_name: Optional[str] = None
+    upload_date: str
+    risk_level: RiskLevel
+    findings: list[str]
+    created_at: Optional[str] = None
+    doctor_notes: Optional[str] = None
+    doctor_validated: Optional[bool] = None
+
+
+# --- Dashboard (polymorphic by role) ---
+class DashboardRecentResult(BaseModel):
+    id: str
+    image_name: str
+    upload_date: str
+    risk_level: RiskLevel
+
+
+class DashboardUserStatsResponse(BaseModel):
+    role: Literal["user"]
+    remaining_credits: int
+    total_analyses: int
+    high_risk_cases: int
+    pending_results: int
+    recent_results: list[DashboardRecentResult]
+
+
+class DashboardClinicAlert(BaseModel):
+    id: str
+    title: str
+    message: str
+    level: Literal["high-risk", "medium-risk", "info"]
+    created_at: str
+
+
+class DashboardClinicStatsResponse(BaseModel):
+    role: Literal["clinic"]
+    total_doctors: int
+    total_patients: int
+    images_analyzed: int
+    remaining_credits: int
+    high_risk_patients: int
+    recent_alerts: list[DashboardClinicAlert]
+
+
+class DashboardAdminActivity(BaseModel):
+    message: str
+    time: str
+
+
+class DashboardAdminStatsResponse(BaseModel):
+    role: Literal["admin"]
+    total_users: int
+    total_doctors: int
+    total_clinics: int
+    total_images: int
+    revenue: float
+    ai_accuracy: float
+    risk_distribution: dict[str, int]
+    recent_activity: list[DashboardAdminActivity]
+
+
+class DashboardDoctorStatsResponse(BaseModel):
+    role: Literal["doctor"]
+    total_patients: int
+    images_analyzed: int
+    high_risk_cases: int

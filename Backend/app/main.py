@@ -4,11 +4,25 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import init_seed_data
 from app.routers import auth, users, packages, images, results, dashboard, patients, clinics, alerts
+from app.models import RootResponse, HealthResponse
+
+tags_metadata = [
+    {"name": "auth", "description": "Authentication (login/register/me)"},
+    {"name": "users", "description": "User profile and admin user management"},
+    {"name": "packages", "description": "Service packages, purchase, credits and payments"},
+    {"name": "images", "description": "Retinal image upload and listing"},
+    {"name": "results", "description": "Diagnostic results and history"},
+    {"name": "dashboard", "description": "Dashboard stats per role"},
+    {"name": "patients", "description": "Patients list for doctor/clinic"},
+    {"name": "clinics", "description": "Clinic management for admin"},
+    {"name": "alerts", "description": "Clinic alerts"},
+]
 
 app = FastAPI(
     title="AURA System API",
     description="Backend API for AURA retinal analysis system",
     version="1.0.0",
+    openapi_tags=tags_metadata,
 )
 
 app.add_middleware(
@@ -38,11 +52,11 @@ def startup():
     init_seed_data()
 
 
-@app.get("/")
+@app.get("/", response_model=RootResponse)
 def root():
     return {"message": "AURA System API", "docs": "/docs"}
 
 
-@app.get("/api/health")
+@app.get("/api/health", response_model=HealthResponse)
 def health():
     return {"status": "ok"}

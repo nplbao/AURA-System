@@ -4,12 +4,12 @@ from typing import Annotated
 from fastapi import APIRouter, Depends
 
 from app.deps import require_roles
-from app.models import UserRole
+from app.models import UserRole, AlertResponse
 
 router = APIRouter(prefix="/alerts", tags=["alerts"])
 
 
-@router.get("", response_model=list[dict])
+@router.get("", response_model=list[AlertResponse])
 def list_alerts(
     user: Annotated[dict, Depends(require_roles([UserRole.clinic]))],
 ):
