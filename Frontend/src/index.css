@@ -5,8 +5,24 @@
 
   /* Luôn dùng giao diện tối, không phụ thuộc vào theme hệ điều hành */
   color-scheme: dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #000000;
+  color: #e5e7eb;
+  background-color: #020617;
+
+  /* Palette chính cho theme tối */
+  --bg-body: #020617;
+  --bg-elevated: #020617;
+  --bg-elevated-soft: #020617;
+  --bg-card: #020617;
+  --bg-card-soft: #020617;
+  --border-subtle: #1f2937;
+  --border-strong: #334155;
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+  --text-soft: #6b7280;
+  --accent: #6366f1;
+  --accent-soft: #4f46e5;
+  --accent-strong: #a855f7;
+  --accent-gradient: linear-gradient(135deg, #4f46e5 0%, #a855f7 100%);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -27,9 +43,12 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  /* Nền trang luôn đen cho mọi người dùng */
-  background-color: #000000;
-  color: rgba(255, 255, 255, 0.87);
+  /* Nền trang luôn đen cho mọi người dùng, kèm gradient nhẹ cho chiều sâu */
+  background:
+    radial-gradient(circle at top, #111827 0, rgba(15, 23, 42, 0.7) 35%, transparent 55%),
+    radial-gradient(circle at bottom, #020617 0, rgba(15, 23, 42, 0.9) 40%, #000000 80%);
+  background-color: var(--bg-body);
+  color: var(--text-main);
 }
 
 h1 {
