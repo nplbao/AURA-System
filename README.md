@@ -1,5 +1,6 @@
 # AURA – System for Retinal Vascular Health Screening
 ### Project Structure
+```
 AURA-System/
 ├── Backend/                         # Backend API (FastAPI)
 │   ├── app/
@@ -46,6 +47,7 @@ AURA-System/
 │
 ├── README.md                        # Hướng dẫn cài đặt & chạy backend/frontend, link Swagger UI
 └── (Git repo, cấu hình khác)        # .git, .gitignore, cấu hình Cursor/IDE (nếu có)
+```
 ### Cài đặt & chạy backend
 
 Yêu cầu: Python 3.10+ (khuyến nghị 3.12/3.13).
