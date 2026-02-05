@@ -64,7 +64,10 @@ Cấu hình API: tạo file `.env` trong thư mục Frontend (tuỳ chọn) vớ
 ### Cài đặt & chạy frontend
 
 ```bash
-cd Frontend
-npm install
+Bước 1:
+    cd Frontend
+Bước 2:
+    npm install
+Bước 3:
 npm run dev
 ```
