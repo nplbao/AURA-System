@@ -5,22 +5,23 @@
 .dashboard h1 {
   font-size: 2rem;
   margin-bottom: 2rem;
-  color: #1a202c;
+  color: #e5e7eb;
 }
 
 .dashboard h2 {
   font-size: 1.5rem;
   margin-top: 2rem;
   margin-bottom: 1rem;
-  color: #374151;
+  color: #cbd5f5;
 }
 
 .dashboard-section {
   margin-top: 2rem;
   padding: 1.5rem;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background: #020617;
+  border-radius: 16px;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.35);
 }
 
 .stats-grid {
@@ -31,20 +32,22 @@
 }
 
 .stat-card {
-  background: white;
+  background: radial-gradient(circle at top, rgba(30, 64, 175, 0.22), #020617 55%);
   padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
   text-align: center;
+  border: 1px solid rgba(148, 163, 184, 0.4);
 }
 
 .stat-card.warning {
-  border-left: 4px solid #ef4444;
+  border-left: 4px solid #f97373;
+  background: radial-gradient(circle at top, rgba(248, 113, 113, 0.25), #020617 60%);
 }
 
 .stat-card h3 {
   font-size: 0.875rem;
-  color: #6b7280;
+  color: #9ca3af;
   margin-bottom: 0.5rem;
   font-weight: 500;
 }
@@ -52,11 +55,11 @@
 .stat-value {
   font-size: 2rem;
   font-weight: 700;
-  color: #1a202c;
+  color: #e5e7eb;
 }
 
 .stat-value.warning {
-  color: #ef4444;
+  color: #f97373;
 }
 
 /* Upload Section */
@@ -65,24 +68,28 @@
 }
 
 .upload-card {
-  background: white;
+  background: #020617;
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.35);
 }
 
 .upload-area {
-  border: 2px dashed #d1d5db;
-  border-radius: 8px;
+  border: 2px dashed rgba(148, 163, 184, 0.7);
+  border-radius: 16px;
   padding: 3rem;
   text-align: center;
   margin: 1.5rem 0;
   cursor: pointer;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+  background-color: rgba(15, 23, 42, 0.8);
 }
 
 .upload-area:hover {
-  border-color: #667eea;
+  border-color: #6366f1;
+  background-color: rgba(15, 23, 42, 0.95);
+  box-shadow: 0 14px 32px rgba(99, 102, 241, 0.55);
 }
 
 .upload-area.large {
@@ -210,21 +217,24 @@
 }
 
 .result-card {
-  background: white;
+  background: #020617;
   padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s, background-color 0.2s;
+  border: 1px solid rgba(51, 65, 85, 0.85);
 }
 
 .result-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 18px 48px rgba(15, 23, 42, 0.95);
+  border-color: rgba(129, 140, 248, 0.9);
 }
 
 .result-card.selected {
-  border: 2px solid #667eea;
+  border: 2px solid #6366f1;
+  box-shadow: 0 18px 50px rgba(99, 102, 241, 0.75);
 }
 
 .result-header {
@@ -235,7 +245,7 @@
 }
 
 .result-date {
-  color: #6b7280;
+  color: #9ca3af;
   font-size: 0.875rem;
   margin-bottom: 1rem;
 }
@@ -246,10 +256,11 @@
 }
 
 .result-details {
-  background: white;
+  background: #020617;
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.35);
 }
 
 .detail-section {
@@ -377,32 +388,35 @@
 table {
   width: 100%;
   border-collapse: collapse;
-  background: white;
-  border-radius: 8px;
+  background: #020617;
+  border-radius: 16px;
   overflow: hidden;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(30, 64, 175, 0.45);
 }
 
 thead {
-  background: #f9fafb;
+  background: radial-gradient(circle at top, rgba(30, 64, 175, 0.32), #020617 65%);
 }
 
 th {
   padding: 1rem;
   text-align: left;
   font-weight: 600;
-  color: #374151;
-  font-size: 0.875rem;
+  color: #e5e7eb;
+  font-size: 0.75rem;
   text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 td {
   padding: 1rem;
-  border-top: 1px solid #e5e7eb;
-  color: #6b7280;
+  border-top: 1px solid rgba(30, 64, 175, 0.32);
+  color: #cbd5f5;
 }
 
 tr:hover {
-  background: #f9fafb;
+  background: rgba(15, 23, 42, 0.95);
 }
 
 /* Filters */
@@ -496,7 +510,7 @@ tr:hover {
 .packages-section,
 .payment-history-section,
 .credits-section {
-  background: white;
+  background: rgb(0, 0, 0);
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
