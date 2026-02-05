@@ -510,7 +510,7 @@ tr:hover {
 .packages-section,
 .payment-history-section,
 .credits-section {
-  background: white;
+  background: rgb(0, 0, 0);
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
