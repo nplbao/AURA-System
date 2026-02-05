@@ -3,9 +3,10 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
+  /* Luôn dùng giao diện tối, không phụ thuộc vào theme hệ điều hành */
+  color-scheme: dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #000000;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -26,6 +27,9 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  /* Nền trang luôn đen cho mọi người dùng */
+  background-color: #000000;
+  color: rgba(255, 255, 255, 0.87);
 }
 
 h1 {
@@ -50,17 +54,4 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
