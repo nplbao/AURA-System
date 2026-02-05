@@ -15,8 +15,10 @@ cd Backend
 Windows (PowerShell):
 
 ```powershell
-python -m venv venv
-venv\Scripts\Activate.ps1
+Tạo môi trường:
+    python -m venv venv
+Kích hoạt môi trường:
+    venv\Scripts\Activate.ps1
 ```
 
 Nếu PowerShell chặn chạy script:
@@ -34,9 +36,9 @@ source venv/bin/activate
 
 3) Cài dependencies:
 
-
+```bash
 py -m pip install -r requirements.txt
-
+```
 
 4) Chạy server:
 
